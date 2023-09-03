@@ -74,8 +74,8 @@ class OpenAIRepository {
     return model == defaultImageModel;
   }
 
-  // 兼容性列表查看：https://platform.openai.com/docs/models/gpt-3
-  // key: 模型名, value: 是否支持聊天模式
+// Список совместимых моделей: https://platform.openai.com/docs/models/gpt-3
+// Ключ: имя модели, значение: поддерживает ли режим чата
   static final supportForChat = <String, mm.Model>{
     'gpt-3.5-turbo': mm.Model(
       'gpt-3.5-turbo',
@@ -83,7 +83,7 @@ class OpenAIRepository {
       'openai',
       category: modelTypeOpenAI,
       isChatModel: true,
-      description: '能力最强的 GPT-3.5 模型，成本低',
+      description: 'Самая мощная модель GPT-3.5 с низкой стоимостью',
     ),
     'gpt-3.5-turbo-16k': mm.Model(
       'gpt-3.5-turbo-16k',
@@ -91,7 +91,8 @@ class OpenAIRepository {
       'openai',
       category: modelTypeOpenAI,
       isChatModel: true,
-      description: '能力最强的 GPT-3.5 模型，成本为 gpt-3.5-turbo 的两倍，但是支持 4K 上下文',
+      description:
+          'Самая мощная модель GPT-3.5 с поддержкой 4K контекста, стоимостью в два раза выше, чем у gpt-3.5-turbo',
     ),
     'gpt-4': mm.Model(
       'gpt-4',
@@ -99,16 +100,17 @@ class OpenAIRepository {
       'openai',
       category: modelTypeOpenAI,
       isChatModel: true,
-      description: '比GPT-3.5模型更强，能够执行复杂任务，并优化用于聊天',
+      description:
+          'Мощная модель GPT-4 с способностью выполнять сложные задачи и оптимизированная для чатов',
     ),
-
     'gpt-4-32k': mm.Model(
       'gpt-4-32k',
       'gpt-4-32k',
       'openai',
       category: modelTypeOpenAI,
       isChatModel: true,
-      description: '基于 GPT-4，但是支持4倍的内容长度',
+      description:
+          'Модель на основе GPT-4 с поддержкой четырехкратной длины контента',
     ),
 
     // 'gpt-4-0314': Model(

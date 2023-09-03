@@ -105,7 +105,7 @@ void main() async {
     databaseFactory = databaseFactoryFfiWeb;
   }
 
-  // 数据库连接
+// Подключение к базе данных
   final db = await databaseFactory.openDatabase(
     'system.db',
     options: OpenDatabaseOptions(
@@ -114,7 +114,7 @@ void main() async {
         try {
           await migrate(db, oldVersion, newVersion);
         } catch (e) {
-          Logger.instance.e('数据库升级失败', e);
+          Logger.instance.e('Ошибка обновления базы данных', e);
         }
       },
       onCreate: initDatabase,
@@ -521,7 +521,7 @@ class MyApp extends StatefulWidget {
                   ],
                   child: ImageEditDirectScreen(
                     setting: settingRepo,
-                    title: '超分辨率',
+                    title: 'Суперразрешение',
                     apiEndpoint: 'upscale',
                   ),
                 ),
@@ -537,7 +537,7 @@ class MyApp extends StatefulWidget {
                   ],
                   child: ImageEditDirectScreen(
                     setting: settingRepo,
-                    title: '图片上色',
+                    title: 'Раскраска изображения',
                     apiEndpoint: 'colorize',
                   ),
                 ),
@@ -778,9 +778,10 @@ class _MyAppState extends State<MyApp> {
 
     widget.localization.init(
       mapLocales: [
-        const MapLocale('zh', AppLocale.ZH),
-        const MapLocale('zh-CHS', AppLocale.ZH),
-        const MapLocale('en', AppLocale.EN),
+        const MapLocale('zh', AppLocale.zh),
+        const MapLocale('zh-CHS', AppLocale.zh),
+        const MapLocale('en', AppLocale.en),
+        const MapLocale('ru', AppLocale.ru),
       ],
       // initLanguageCode: initLanguage == '' ? defaultLanguage : initLanguage,
       initLanguageCode: 'zh-CHS',

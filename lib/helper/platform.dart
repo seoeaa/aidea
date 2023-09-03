@@ -57,7 +57,12 @@ class PlatformTool {
 
   static String localeName() {
     try {
-      return Platform.localeName;
+      // Возвращаем русскую локаль
+      if (Platform.localeName.startsWith('ru')) {
+        return 'ru';
+      } else {
+        return 'zh_Hans_CN'; // Локаль по умолчанию
+      }
     } catch (e) {
       return 'zh_Hans_CN';
     }

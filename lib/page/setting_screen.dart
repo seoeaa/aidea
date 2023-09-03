@@ -134,15 +134,16 @@ class _SettingScreenState extends State<SettingScreen> {
                                 context,
                                 type: QuickAlertType.success,
                                 text: resp.message,
-                                confirmBtnText: '去更新',
+                                confirmBtnText: 'Обновить',
                                 onConfirmBtnTap: () {
                                   launchUrlString(resp.url);
                                 },
-                                cancelBtnText: '暂不更新',
+                                cancelBtnText: 'Не сейчас',
                                 showCancelBtn: true,
                               );
                             } else {
-                              showSuccessMessage('当前已是最新版本');
+                              showSuccessMessage(
+                                  'Текущая версия уже актуальна');
                             }
                           });
                         },
@@ -328,6 +329,24 @@ class _SettingScreenState extends State<SettingScreen> {
                   onTap: () async {
                     await widget.settings.set(settingLanguage, 'zh-CHS');
                     FlutterLocalization.instance.translate('zh-CHS');
+                    if (context.mounted) {
+                      context.pop();
+                    }
+                  },
+                ),
+                ListTile(
+                  title: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      const Text('Русский'),
+                      current == 'ru'
+                          ? const Icon(Icons.check, color: Colors.green)
+                          : const SizedBox(),
+                    ],
+                  ),
+                  onTap: () async {
+                    await widget.settings.set(settingLanguage, 'ru');
+                    FlutterLocalization.instance.translate('ru');
                     if (context.mounted) {
                       context.pop();
                     }

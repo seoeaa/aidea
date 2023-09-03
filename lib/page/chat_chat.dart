@@ -404,7 +404,7 @@ class _ChatChatScreenState extends State<ChatChatScreen> {
                                   margin:
                                       const EdgeInsets.only(top: 20, left: 15),
                                   child: Text(
-                                    '历史记录',
+                                    'История записей',
                                     style: TextStyle(
                                       color: customColors.weakTextColor
                                           ?.withAlpha(100),
@@ -588,7 +588,7 @@ class ChatHistoryItem extends StatelessWidget {
                 children: [
                   Expanded(
                     child: Text(
-                      (history.title ?? '未命名').trim(),
+                      (history.title ?? 'без названия').trim(),
                       overflow: TextOverflow.ellipsis,
                       style: TextStyle(
                         color: customColors.weakTextColor,
@@ -610,7 +610,9 @@ class ChatHistoryItem extends StatelessWidget {
               subtitle: Padding(
                 padding: const EdgeInsets.only(top: 5),
                 child: Text(
-                  (history.lastMessage ?? '暂无内容').trim().replaceAll("\n", " "),
+                  (history.lastMessage ?? 'Нет содержания')
+                      .trim()
+                      .replaceAll("\n", " "),
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                   style: TextStyle(

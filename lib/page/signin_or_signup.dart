@@ -110,7 +110,7 @@ class _SigninOrSignupScreenState extends State<SigninOrSignupScreen> {
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 20),
           child: Text(
-            '请使用 ${widget.username} 的密码进行登录。',
+            '请使用 ${widget.username} Для входа используйте пароль, связанный с вашим аккаунтом.',
             style: TextStyle(
               color: customColors.weakTextColor?.withAlpha(200),
               fontSize: 15,

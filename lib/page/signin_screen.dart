@@ -151,7 +151,7 @@ class _SignInScreenState extends State<SignInScreen> {
                     width: double.infinity,
                     padding: const EdgeInsets.symmetric(horizontal: 15),
                     child: Text(
-                      '未注册的手机号验证成功后将自动注册',
+                      'После успешной верификации незарегистрированного номера телефона произойдет автоматическая регистрация.',
                       style: TextStyle(
                         color: customColors.weakTextColor?.withAlpha(80),
                         fontSize: 14,
@@ -170,58 +170,13 @@ class _SignInScreenState extends State<SignInScreen> {
                     child: TextButton(
                       onPressed: onSigninSubmit,
                       child: const Text(
-                        '验证',
+                        'Подтвердить',
                         style: TextStyle(color: Colors.white, fontSize: 18),
                       ),
                     ),
                   ),
 
-                  // Padding(
-                  //   padding: const EdgeInsets.symmetric(horizontal: 15),
-                  //   child: Column(
-                  //     children: [
-                  //       Row(
-                  //         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  //         children: [
-                  //           // 找回密码
-                  //           TextButton(
-                  //             onPressed: () {
-                  //               context.push(
-                  //                   '/retrieve-password?username=${_usernameController.text.trim()}');
-                  //             },
-                  //             child: Text(
-                  //               AppLocale.forgotPassword.getString(context),
-                  //               style: TextStyle(
-                  //                 color: customColors.weakLinkColor,
-                  //                 fontSize: 14,
-                  //               ),
-                  //             ),
-                  //           ),
-                  //           // 创建账号
-                  //           TextButton(
-                  //               onPressed: () {
-                  //                 context
-                  //                     .push(
-                  //                         '/signup?username=${_usernameController.text.trim()}')
-                  //                     .then((value) {
-                  //                   if (value != null) {
-                  //                     _usernameController.text = value as String;
-                  //                   }
-                  //                 });
-                  //               },
-                  //               child: Text(
-                  //                 AppLocale.createAccount.getString(context),
-                  //                 style: TextStyle(
-                  //                   color: customColors.linkColor,
-                  //                   fontSize: 14,
-                  //                 ),
-                  //               )),
-                  //         ],
-                  //       ),
-                  //     ],
-                  //   ),
-                  // ),
-                  _buildUserTermsAndPrivicy(customColors, context),
+                  _buildUserTermsAndPrivacy(customColors, context),
                   const SizedBox(height: 50),
                   // 三方登录
                   BlocBuilder<VersionBloc, VersionState>(
@@ -240,13 +195,12 @@ class _SignInScreenState extends State<SignInScreen> {
     );
   }
 
-  Row _buildUserTermsAndPrivicy(
+  Row _buildUserTermsAndPrivacy(
       CustomColors customColors, BuildContext context) {
     return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Transform.scale(
-          scale: 0.75,
+          scale: 0.5,
           child: Theme(
             data: ThemeData(
               unselectedWidgetColor: customColors.weakTextColor?.withAlpha(180),
@@ -262,56 +216,61 @@ class _SignInScreenState extends State<SignInScreen> {
             ),
           ),
         ),
-        RichText(
-          text: TextSpan(
-            children: [
-              TextSpan(
-                text: AppLocale.readAndAgree.getString(context),
-                style: TextStyle(
-                  color: customColors.weakTextColor?.withAlpha(80),
-                  fontSize: 12,
+        SizedBox(width: 8.0), // Регулируйте отступы здесь
+        Expanded(
+          child: RichText(
+            text: TextSpan(
+              children: [
+                TextSpan(
+                  text: AppLocale.readAndAgree.getString(context),
+                  style: TextStyle(
+                    color: customColors.weakTextColor?.withAlpha(80),
+                    fontSize: 12,
+                  ),
+                  recognizer: TapGestureRecognizer()
+                    ..onTap = () {
+                      setState(() {
+                        agreeProtocol = !agreeProtocol;
+                      });
+                    },
                 ),
-                recognizer: TapGestureRecognizer()
-                  ..onTap = () {
-                    setState(() {
-                      agreeProtocol = !agreeProtocol;
-                    });
-                  },
-              ),
-              TextSpan(
-                text: '《${AppLocale.userTerms.getString(context)}》',
-                style: TextStyle(
-                  color: customColors.linkColor?.withAlpha(150),
-                  fontSize: 12,
+                TextSpan(
+                  text: '《${AppLocale.userTerms.getString(context)}》',
+                  style: TextStyle(
+                    color: customColors.linkColor?.withAlpha(150),
+                    fontSize: 12,
+                  ),
+                  recognizer: TapGestureRecognizer()
+                    ..onTap = () {
+                      launchUrl(
+                        Uri.parse('$apiServerURL/public/info/terms-of-user'),
+                      );
+                    },
                 ),
-                recognizer: TapGestureRecognizer()
-                  ..onTap = () {
-                    launchUrl(
-                        Uri.parse('$apiServerURL/public/info/terms-of-user'));
-                  },
-              ),
-              TextSpan(
-                text: AppLocale.andWord.getString(context),
-                style: TextStyle(
-                  color: customColors.weakTextColor?.withAlpha(80),
-                  fontSize: 12,
+                TextSpan(
+                  text: AppLocale.andWord.getString(context),
+                  style: TextStyle(
+                    color: customColors.weakTextColor?.withAlpha(80),
+                    fontSize: 12,
+                  ),
                 ),
-              ),
-              TextSpan(
-                text: '《${AppLocale.privacyPolicy.getString(context)}》',
-                style: TextStyle(
-                  color: customColors.linkColor?.withAlpha(150),
-                  fontSize: 12,
+                TextSpan(
+                  text: '《${AppLocale.privacyPolicy.getString(context)}》',
+                  style: TextStyle(
+                    color: customColors.linkColor?.withAlpha(150),
+                    fontSize: 12,
+                  ),
+                  recognizer: TapGestureRecognizer()
+                    ..onTap = () {
+                      launchUrl(
+                        Uri.parse('$apiServerURL/public/info/privacy-policy'),
+                      );
+                    },
                 ),
-                recognizer: TapGestureRecognizer()
-                  ..onTap = () {
-                    launchUrl(
-                        Uri.parse('$apiServerURL/public/info/privacy-policy'));
-                  },
-              ),
-            ],
+              ],
+            ),
           ),
-        )
+        ),
       ],
     );
   }
@@ -331,7 +290,7 @@ class _SignInScreenState extends State<SignInScreen> {
     return Column(
       children: [
         Text(
-          '其它登录方式',
+          'Другие способы входа.',
           style: TextStyle(
             fontSize: 13,
             color: customColors.weakTextColor?.withAlpha(80),
